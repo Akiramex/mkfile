@@ -1,0 +1,170 @@
+<html lang="zh-CN"><head><meta charset="UTF-8"><style>.nodata  main {width:1000px;margin: auto;}</style></head><body class="nodata " style=""><div class="main_father clearfix d-flex justify-content-center " style="height:100%;"> <div class="container clearfix " id="mainBox"><main><div class="blog-content-box">
+<div class="article-header-box">
+<div class="article-header">
+<div class="article-title-box">
+<h1 class="title-article" id="articleContentId">Qt Quick之StackView详解（1）</h1>
+</div>
+
+</div>
+</div>
+<div id="blogHuaweiyunAdvert"></div>
+<article class="baidu_pl">
+<div class="article_content clearfix" id="article_content">
+<link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css" rel="stylesheet"/>
+<link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-044f2cf1dc.css" rel="stylesheet"/>
+<div class="markdown_views prism-atom-one-light" id="content_views">
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+<path d="M5,0 0,2.5 5,5z" id="raphael-marker-block" stroke-linecap="round" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+</svg>
+<p>Qt Quick中有个StackView，我在《<a href="http://item.jd.com/11587406.html" rel="nofollow"><strong>Qt Quick核心编程</strong></a>》一书中没有讲到，最近有人问起，趁机学习了一下，把它的基本用法记录下来。</p>
+<p>我准备分两次来讲。第一次讲基本的用法，包括StackView的适用场景、基本属性和方法的用法。第二次讲一些稍微复杂点的东西，比如被StackView管理的view的生命周期、delegate定制、查找等。</p>
+<p>示例会用到动态创建组建，可以参考我之前的文章“<a href="http://blog.csdn.net/foruok/article/details/32730911"><strong>Qt Quick 组件与对象动态创建详解</strong></a>”。也会用到锚布局，参考“<a href="http://blog.csdn.net/foruok/article/details/33738227"><strong>Qt Quick 布局介绍</strong></a>”。还会用到Button、Rectangle、MouseArea、Text等基本元素，请参考《<a href="http://item.jd.com/11587406.html" rel="nofollow"><strong>Qt Quick核心编程</strong></a>》一书。</p>
+<h2 id="stackview介绍">StackView介绍</h2>
+<p>StackView实现了一个栈式的导航。“<strong>栈</strong>”大家都知道是怎么回事儿，就是一种数据结构，先进后出（FILO），支持pop、push等操作。StackView用于栈类似的行为方式管理一系列的View（页面或视图），这些View之间可能有内在联系，根据业务需要，可以一级一级向深处的跳转，当前的View上发生点儿什么事儿，就可能会产生一个新的View或返回之前的页面。</p>
+<p>举两个简单的场景。</p>
+<p>比如注册账号这个场景，有一种做法是分几个步骤，比如第一步先让你输入用户名、密码，你点击下一步之后呢，会出现新的页面，接着让你输入姓名、爱好、邮箱、社交方式等。</p>
+<p>比如你在某个招聘网站提交简历，先是填写基本信息，如姓名、毕业院校、联系方式、求职意向等，然后下一步，就让你添加工作经验……一路Next下去即可。说到这里你可以看看我之前写的一篇文章，<a href="http://blog.csdn.net/foruok/article/details/46798495"><strong>史上最全的程序员求职渠道总结</strong></a>。</p>
+<p>StackView是FocusScope的子类，FocusScope是Item的子类。从这个继承关系来看，StackView要作为一个Window的孩子（孩子的孩子也可以，孩子的孩子的孩子也可以……）来使用。当然如果你用QQuickView来加载main.qml的话，StackView也可以作为main.qml的根节点，不必嵌套在一个Window里。</p>
+<p>StackView有几个属性：</p>
+<ul><li>busy 指示StackView是否正在应用过渡动画，为true时表示正在应用动画。可以通过属性变化信号处理器onBusyChanged来响应busy属性变化，结合我们的业务需求来做一些处理，比如在动画期间禁止用户点击。</li><li>currentItem 指向栈顶的View（Item），可能为空。</li><li>delegate 用于定制页面切换时的过渡动画。</li><li>depth 栈的深度，StackView中没有子页面时，depth为0，有一个子页面时，depth为1……</li><li>initialItem 初始的View（Item）。我们可以通过这个属性来指定StackView管理的第一个页面（View），如果你在初始化时给initalItem赋值，效果就相当于我们在Component.onCompleted信号处理器中调用 push(yourItem)。如果你不显式给initalItem赋值，当第一个页面被push进StackView时，这个属性也会被自动赋值。</li></ul>
+<p>StackView有几个方法：</p>
+<ul><li>clear()，顾名思义，干掉StackView管理的所有页面</li><li>pop(item)，出栈操作。无参调用pop时，讲栈顶的页面弹出。如果带参数，则将参数指定的页面之后的所有页面都弹出。举个例子吧，现在栈内页面时酱紫的，[A,B,C,D,E]，pop()调用后，就变为[A,B,C,D]。你再调用pop(B)，就会变成[A,B]。</li><li>push(item)，入栈操作，参数是Item，将一个页面压入StackView。这个页面（Item）一般是动态创建的。待会儿我们的示例可以看到。有一个特别的用法，可以替换栈顶元素，比如你的栈是[A,B,C,D]，push(E, replace)，就会用E替换栈顶的D，栈就会变为[A,B,C,E]。关于push，还有一些其它用法，参考Qt帮助吧。</li><li>find(func, onlySearchLoadedItems)，查找StackView管理的某个页面。find将对栈内的每个页面应用func方法，当func返回true时，表示找到了，查找过程就会停止，然后find会返回找到的那个Item。</li><li>completeTransition()，立即结束过渡动画。</li></ul>
+<p>再啰嗦几句吧。StackView本身其实是一个正常的Item，这从它的类继承关系可以看出来。所以呢，你可以指定它的大小（width、height），也可以使用anchors等布局。StackView管理的页面，都会作为StackView的孩子，这些子View们，默认会充满StackView的可用区域，我们不能使用anchors来布局子页面，假如你为子View使用了anchors，那页面切换时的动画效果就会失效。还有一点，指定子页面的大小（width、height）也不管用。所以，省事儿啦。</p>
+<h2 id="stackview示例">StackView示例</h2>
+<p>设计了一个非常简单的示例，效果如下图所示：</p>
+<p><img alt="stackview示例动画" src="https://img-blog.csdn.net/20150711095336112" title=""/></p>
+<p>我们看到，在上面的GIF中，点击Next按钮会新创建一个页面并将这个页面加入到StackView中，页面切换时有一个动画效果。这个动画效果是StackView提供的默认效果，如果我们想改变它，就可以通过delegate属性来定制。</p>
+<p>所有代码在这里了：</p>
+<pre><code>import QtQuick 2.4
+import QtQuick.Controls 1.3
+import QtQuick.Window 2.2
+
+Window {
+    title: "StackViewDemo";
+    width: 480;
+    height: 320;
+    visible: true;
+
+    StackView {
+        id: stack;
+        anchors.centerIn: parent;
+        width: 600;
+        height: 300;
+        property var home: null;
+
+        Text {
+            text: "Click to create first page";
+            font.pointSize: 14;
+            font.bold: true;
+            color: "blue";
+            anchors.centerIn: parent;
+            MouseArea {
+                anchors.fill: parent;
+                onClicked: if(stack.depth == 0)stack.push(page);
+            }
+        }
+    }
+
+    Component {
+        id: page;
+
+        Rectangle {
+            color: Qt.rgba(stack.depth*0.1, stack.depth*0.2, stack.depth*0.3);
+
+            Text {
+                anchors.centerIn: parent;
+                text: "depth - " + stack.depth;
+                font.pointSize: 24;
+                font.bold: true;
+                color: stack.depth &lt;= 4 ? Qt.lighter(parent.color) : Qt.darker(parent.color);
+            }
+
+            Button {
+                id: next;
+                anchors.right: parent.right;
+                anchors.bottom: parent.bottom;
+                anchors.margins: 8;
+                text: "Next";
+                width: 70;
+                height: 30;
+                onClicked: {
+                    if(stack.depth &lt; 8) stack.push(page);
+                }
+            }
+
+            Button {
+                id: back;
+                anchors.right: next.left;
+                anchors.top: next.top;
+                anchors.rightMargin: 8;
+                text: "Back";
+                width: 70;
+                height: 30;
+                onClicked: {
+                    if(stack.depth &gt; 0) stack.pop();
+                }
+            }
+
+            Button {
+                id: home;
+                anchors.right: back.left;
+                anchors.top: next.top;
+                anchors.rightMargin: 8;
+                text: "Home";
+                width: 70;
+                height: 30;
+                onClicked: {
+                    if(stack.depth &gt; 0)stack.pop(stack.initialItem);
+                }
+            }
+
+            Button {
+                id: clear;
+                anchors.right: home.left;
+                anchors.top: next.top;
+                anchors.rightMargin: 8;
+                text: "Clear";
+                width: 70;
+                height: 30;
+                onClicked: {
+                    if(stack.depth &gt; 0)stack.clear();
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>简单解释一下上面的代码，id为stack的StackView，内部放了一个Text元素，点击时创建第一个页面。页面由内嵌在main.qml中的Component提供。</p>
+<p>id为page的组件，顶层元素是个Rectangle对象，颜色由StackView的depth属性决定。这个Rectangle内部，中间放了一个Text，底部放了Clear、Home、Back、Next几个按钮，在这些按钮的onClicked信号处理器中，调用了StackView的clear、pop、push等方法。</p>
+<p>你可以使用qmlscene来加载示例qml文档，也可以通过Qt Creator创建一个Qt Quick App来查看效果。建议使用Qt SDK 5.3.0及以上版本。</p>
+<p>OK，这次就先到这里了。下次我们来讲StackView管理的页面（View）的生命周期、查找View、动画定制等内容。</p>
+<hr/>
+<p>更多Qt Quick文章请参考我的<a href="http://blog.csdn.net/column/details/qtquick.html"><strong>Qt Quick专栏</strong></a>，想系统学些Qt Quick(QML)，请阅读《<a href="http://item.jd.com/11587406.html" rel="nofollow"><strong>Qt Quick核心编程</strong></a>》。 <br/> 我开通了微信订阅号“程序视界”，关注即可第一时间看到我的原创文章以及我推荐的精彩文章：</p>
+<p><img alt="程序视界" src="https://img-blog.csdn.net/20150518172252230" title=""/></p>
+</div>
+<link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-f23dff6052.css" rel="stylesheet"/>
+<link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-c216769e99.css" rel="stylesheet"/>
+</div>
+<div id="treeSkill"></div>
+</article>
+<script>
+  $(function() {
+    setTimeout(function () {
+      var mathcodeList = document.querySelectorAll('.htmledit_views img.mathcode');
+      if (mathcodeList.length > 0) {
+        for (let i = 0; i < mathcodeList.length; i++) {
+          if (mathcodeList[i].naturalWidth === 0 || mathcodeList[i].naturalHeight === 0) {
+            var alt = mathcodeList[i].alt;
+            alt = '\\(' + alt + '\\)';
+            var curSpan = $('<span class="img-codecogs"></span>');
+            curSpan.text(alt);
+            $(mathcodeList[i]).before(curSpan);
+            $(mathcodeList[i]).remove();
+          }
+        }
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      }
+    }, 1000)
+  });
+</script>
+</div></html>

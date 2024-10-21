@@ -1,0 +1,85 @@
+<mxfile host="Electron" modified="2024-05-04T15:15:56.896Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="7zgffIo2E2JaA05mzL6p" version="23.1.5" type="device">
+  <diagram name="第 1 页" id="UIDL5zGrbZfmMvBLMXxF">
+    <mxGraphModel dx="2876" dy="1206" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-1" target="vMf-iUs0ifntF8y_PJQ5-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-1" target="vMf-iUs0ifntF8y_PJQ5-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-1" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;类型是否为单例模式&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="244" y="74" width="274" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-2" target="vMf-iUs0ifntF8y_PJQ5-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-2" target="vMf-iUs0ifntF8y_PJQ5-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-2" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;类型是否需要&lt;br&gt;实例化为QML组件&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="251" width="214" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-3" target="vMf-iUs0ifntF8y_PJQ5-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-3" target="vMf-iUs0ifntF8y_PJQ5-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-3" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;类型是否在多引擎下可用&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="280" width="214" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-4" target="vMf-iUs0ifntF8y_PJQ5-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="vMf-iUs0ifntF8y_PJQ5-4" target="vMf-iUs0ifntF8y_PJQ5-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-4" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;类型将被引用的名称，&lt;br&gt;如一个属性声明&lt;br&gt;(propertyType foo)&lt;br&gt;或访问枚举值(type .Foo)?&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="510" width="290" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-5" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;qmlRegisterAnonymousType&lt;br&gt;&amp;lt;Type&amp;gt;(&quot;Foo&quot;, 1)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-430" y="770" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-6" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;qmlRegisterType&amp;lt;Type&amp;gt;&lt;br&gt;(&quot;Foo&quot;, 1, 0, &quot;Type&quot;)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="770" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-8" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;qmlRegisterType&amp;lt;Type&amp;gt;&lt;br&gt;(&quot;Foo&quot;, 1, 0, &quot;Type)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="241" y="770" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-9" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;qmlRegisterSingletonInstance&lt;br&gt;(&quot;Foo&quot;, 1, 0, &quot;Type&quot;, &amp;amp;instance)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="570" y="770" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-10" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;qmlRegisterSingletonType&amp;lt;Type&amp;gt;&lt;/font&gt;&lt;br style=&quot;border-color: var(--border-color); font-size: 18px;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;(&quot;Foo&quot;, 1, 0, &quot;Type&quot;, &lt;br&gt;createTypeFunction)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="911" y="770" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-19" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;否&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="150" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-20" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;是&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="150" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-21" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;是&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="540" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-22" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;否&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="540" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-23" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;是&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="540" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-24" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;否&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="420" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-25" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;否&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="660" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vMf-iUs0ifntF8y_PJQ5-26" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;是&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="660" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
